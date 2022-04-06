@@ -34,21 +34,16 @@ public class HelloController {
                 "nts=history&includeAdjustedClose=true";
         URL url = new URL(goog);
         BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()));
-        BufferedWriter writer =
-                new BufferedWriter(new FileWriter("Download.html"));
-
 
         String[] parts;
         List<Float> googData = new ArrayList<>();
         String line;
         reader.readLine();
         while ((line = reader.readLine()) != null) {
-            writer.write(line);
             parts = line.split(",");
             googData.add(Float.parseFloat(parts[4]));
         }
         reader.close();
-        writer.close();
 
 
         // Apple
@@ -56,20 +51,17 @@ public class HelloController {
                 "nts=history&includeAdjustedClose=true";
         URL urlA = new URL(amzn);
         BufferedReader readerA = new BufferedReader(new InputStreamReader(urlA.openStream()));
-        BufferedWriter writerA =
-                new BufferedWriter(new FileWriter("DownloadA.html"));
 
 
         String[] partsA;
         List<Float> amznData = new ArrayList<>();
         readerA.readLine();
         while ((line = readerA.readLine()) != null) {
-            writerA.write(line);
             partsA = line.split(",");
             amznData.add(Float.parseFloat(partsA[4]));
         }
         reader.close();
-        writer.close();
+
 
 
         drawLinePlot(googData, amznData);
